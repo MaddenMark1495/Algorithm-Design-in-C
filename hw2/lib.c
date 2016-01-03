@@ -12,39 +12,29 @@
 //Return: A seat struct populated with the specified information
 //
 //Each of the strings malloced inside of the struct should be the exact size
-//of the string that it holds. So, if a passengers first name is Seth then 
+//of the string that it holds. So, if a passengers first name is Seth then
 //seat->fName should point to exactly 5 characters; one for each letter in
-//the name plus the null terminater. 
+//the name plus the null terminater.
 //
 Seat* create_seat(char* fName, char* lName, char* origin, char* dest, int num) {
 
-//	printf("error check1\n");
+
 	Seat* newseat=malloc(sizeof(Seat));
-//	printf("error check2\n");
 	newseat->fName=(char*)malloc((strlen(fName)+1));
-//	printf("error check3\n");
 	newseat->lName=(char*)malloc((strlen(lName)+1));
-//	printf("error check4\n");
 	newseat->origin=(char*)malloc((strlen(origin)+1));
-//	printf("error check5\n");
 	newseat->destination=(char*)malloc((strlen(dest)+1));
-//	printf("error check6\n");
-//	printf("error check7\n");
 	strcpy(newseat->fName,fName);
-//	printf("error check8\n");
 	strcpy(newseat->lName,lName);
-//	printf("error check9\n");
 	strcpy(newseat->origin,origin);
-//	printf("error check10\n");
 	strcpy(newseat->destination,dest);
-//	printf("error check11\n");
 	newseat->seatNumber=num;
-	
+
 	printf("%s %s got in the plane at %s\n",newseat->fName,newseat->lName,newseat->origin);
-	
-	
+
+
 	return newseat;
-	
+
 
 
 }
@@ -55,7 +45,7 @@ Seat* create_seat(char* fName, char* lName, char* origin, char* dest, int num) {
 //Return : Nothing
 //
 //This function should properly free all the memory inside of a seat and
-//set the seat equal to NULL so it may not be referenced by other 
+//set the seat equal to NULL so it may not be referenced by other
 //functions
 void  empty_seat(Seat** seat) {
 
@@ -70,14 +60,14 @@ void  empty_seat(Seat** seat) {
 
 }
 
-//Parameters: 
+//Parameters:
 //plane : the head of a linked list
 //seat  : a pointer to a seat
 //
 //Return: The possibly updated head of the linked list
 //
 //This function should insert the seat into the plane list in sorted order
-//by seat number recursively 
+//by seat number recursively
 Seat* check_in(Seat* plane, Seat* seat) {
 
 	if(plane==NULL)
@@ -86,7 +76,7 @@ Seat* check_in(Seat* plane, Seat* seat) {
 		return seat;
 	}
 	if(plane->seatNumber>seat->seatNumber){
-		
+
 		seat->next=plane;
 		return seat;
 		}
@@ -109,23 +99,14 @@ Seat* land(Seat* plane, char* location) {
 
 	if(plane==NULL){
 		return NULL;
-	
+
 	}
 	if(strcmp(plane->destination,location)==0){
 			Seat* next=plane->next;
 			empty_seat(&plane);
 			return land(next,location);
-			
+
 			}
 		plane->next=land(plane->next,location);
 		return plane;
 		}
-		
-	
-		
-	
-	
-	
-	
-
-
